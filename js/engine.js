@@ -15,6 +15,7 @@
  */
 
 var Engine = (function(global) {
+
     /* Predefine the variables we'll be using within this scope,
      * create the canvas element, grab the 2D context for that canvas
      * set the canvas elements height/width and add it to the DOM.
@@ -46,6 +47,7 @@ var Engine = (function(global) {
          * our update function since it may be used for smooth animation.
          */
         update(dt);
+
         render();
 
         /* Set our lastTime variable which is used to determine the time delta
@@ -115,6 +117,7 @@ var Engine = (function(global) {
                 'images/grass-block.png',   // Row 1 of 2 of grass
                 'images/grass-block.png'    // Row 2 of 2 of grass
             ],
+
             numRows = 6,
             numCols = 5,
             row, col;
@@ -135,7 +138,6 @@ var Engine = (function(global) {
                 ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
             }
         }
-
 
         renderEntities();
     }
@@ -174,11 +176,12 @@ var Engine = (function(global) {
         'images/enemy-bug.png',
         'images/char-boy.png'
     ]);
-    Resources.onReady(init);
 
+    Resources.onReady(init);
     /* Assign the canvas' context object to the global variable (the window
      * object when run in a browser) so that developer's can use it more easily
      * from within their app.js files.
      */
     global.ctx = ctx;
 })(this);
+
