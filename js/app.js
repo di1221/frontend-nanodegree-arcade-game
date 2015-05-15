@@ -1,8 +1,8 @@
 // Speed in pixels per second
 var enemySpeed;
 
-var isGameOver = false;
-
+var isGameOver;
+var type;
 var spriteHeight = 101;
 var spriteWidth = 171;
 
@@ -12,7 +12,6 @@ var HEIGHT = 606; //height of the rectangular area
 //delta time variables for enemies and player updates
 var lastFrameTimeStamp = new Date().getTime();
 var dt = (new Date().getTime() - lastFrameTimeStamp) / 1000;
-
 
 // Enemies the player must avoid
 var Enemy = function (name) {
@@ -38,7 +37,6 @@ Enemy.prototype.update = function(dt) {
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
-
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 101, 171);
 }
 
@@ -54,13 +52,12 @@ Enemy.prototype.checkCollisions = function(enemy, player) {
      player.y = playerLocation.y;
 
     if (this.isColliding(this, player)) {
-      gameReset();
+      gameOver();
     }
 }
 
 //bounding box algorithm
 Enemy.prototype.isColliding = function(enemy, player) {
-
         return ((this.x + spriteWidth/2) > (player.x) &&
             (this.x) < (player.x + spriteWidth/2)  &&
              (this.y + spriteHeight/2) > (player.y)  &&
@@ -73,8 +70,6 @@ var playerLocation = {
 }
 
 function checkPlayerBounds() {
-
- //console.log("playerLocation.x =  " + playerLocation.x);
     // Check bounds
     if(this.playerLocation.x < 0) {
         this.playerLocation.x = 0;
@@ -91,7 +86,9 @@ function checkPlayerBounds() {
     }
 
     if(playerLocation.y <= 20){
-       console.log("You Win!!!!");
+       playerLocation.y <= 20;
+       gameEnd();
+       gameOver();
     }
 }
 
@@ -139,18 +136,32 @@ Player.prototype.update = function(dt) {
     }
 }
 
+// Game over
+function gameOver() {
+    document.getElementById('game-over').style.display = 'block';
+    document.getElementById('game-over-overlay').style.display = 'block';
+    isGameOver = true;
+}
+
+// Reset game to original state
 function gameReset() {
+    document.getElementById('game-over').style.display = 'none';
+    document.getElementById('game-over-overlay').style.display = 'none';
+    isGameOver = false;
+
     playerLocation.x = 200;
     playerLocation.y = 400;
-}
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-
 var player = new Player();
 player.x = 200;
 Player.y = 400;
+
+document.getElementById('game-over').style.display = 'none';
+document.getElementById('game-over-overlay').style.display = 'none';
 
 var a = new Enemy("a");
 var b = new Enemy("b");
@@ -189,7 +200,11 @@ for(var i=0; i <= allEnemies.length; i++){
 
 }
 
-
+function gameEnd(){
+  ctx.font="45px Arial";
+  ctx.fillStyle = "#981201";
+  ctx.fillText("YOU'RE A WINNER!", 50, 500);
+}
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
