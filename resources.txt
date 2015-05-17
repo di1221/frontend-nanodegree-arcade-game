@@ -1,1 +1,9 @@
-resources.txt
+www.w3schools.com
+www.kirupa.com
+http://www.html5canvastutorials.com/
+http://diveintohtml5.info/
+/developer.mozilla.org
+http://jlongster.com/
+http://www.html5rocks.com/
+eloquentjavascript.net/
+stackoverflow.com
