@@ -2,7 +2,6 @@
 var enemySpeed;
 
 var isGameOver;
-var type;
 var spriteHeight = 101;
 var spriteWidth = 171;
 
@@ -31,7 +30,7 @@ Enemy.prototype.update = function(dt) {
     } else {
         this.x = -30;
     }
-
+    //checks for collisions between any enemy and the player
     this.checkCollisions(this, player);
 }
 
@@ -43,7 +42,7 @@ Enemy.prototype.render = function() {
 // player class
 var Player = function(x, y) {
     var player = Object.create(Player.prototype);
-    this.sprite = 'images/char-boy.png';
+    this.sprite = 'images/char-horn-girl.png';
 }
 
 Enemy.prototype.checkCollisions = function(enemy, player) {
@@ -64,6 +63,7 @@ Enemy.prototype.isColliding = function(enemy, player) {
              (this.y) < (player.y + spriteHeight/2));
 };
 
+//starting position for player
 var playerLocation = {
     x: 200,
     y: 400
@@ -87,8 +87,8 @@ function checkPlayerBounds() {
 
     if(playerLocation.y <= 20){
        playerLocation.y <= 20;
-       gameEnd();
        gameOver();
+       gameEnd();
     }
 }
 
@@ -99,6 +99,7 @@ Player.prototype.render = function() {
 }
 
 Player.prototype.update = function(dt) {
+     //event handler for player movement
      Player.handleInput = function(keyCode) {
         if(playerLocation.x <= WIDTH){
             switch(keyCode) {
@@ -136,6 +137,13 @@ Player.prototype.update = function(dt) {
     }
 }
 
+//game ends with a win
+function gameEnd(){
+  ctx.font="45px Arial";
+  ctx.fillStyle = "#981201";
+  ctx.fillText("YOU'RE A WINNER!", 50, 500);
+}
+
 // Game over
 function gameOver() {
     document.getElementById('game-over').style.display = 'block';
@@ -160,9 +168,6 @@ var player = new Player();
 player.x = 200;
 Player.y = 400;
 
-document.getElementById('game-over').style.display = 'none';
-document.getElementById('game-over-overlay').style.display = 'none';
-
 var a = new Enemy("a");
 var b = new Enemy("b");
 var c = new Enemy("c");
@@ -171,6 +176,7 @@ var e = new Enemy("e");
 
 var allEnemies = [a, b, c, d, e];
 
+//defines each enemies speed and starting location.
 for(var i=0; i <= allEnemies.length; i++){
 
     if(i = allEnemies[0]){
@@ -200,11 +206,6 @@ for(var i=0; i <= allEnemies.length; i++){
 
 }
 
-function gameEnd(){
-  ctx.font="45px Arial";
-  ctx.fillStyle = "#981201";
-  ctx.fillText("YOU'RE A WINNER!", 50, 500);
-}
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
@@ -214,6 +215,8 @@ document.addEventListener('keyup', function(e) {
         39: 'right',
         40: 'down'
     };
-
-    Player.handleInput(allowedKeys[e.keyCode]);
+    //handle keyup event only if game active
+   if(!isGameOver) {
+      Player.handleInput(allowedKeys[e.keyCode]);
+   }
 });
