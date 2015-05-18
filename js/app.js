@@ -30,6 +30,7 @@ Enemy.prototype.update = function(dt) {
     } else {
         this.x = -30;
     }
+
     //checks for collisions between any enemy and the player
     this.checkCollisions(this, player);
 }
@@ -144,6 +145,8 @@ function gameEnd(){
   ctx.fillText("YOU'RE A WINNER!", 50, 500);
 }
 
+//ctx.clearRect(0,0, width, height);
+
 // Game over
 function gameOver() {
     document.getElementById('game-over').style.display = 'block';
@@ -178,7 +181,6 @@ var allEnemies = [a, b, c, d, e];
 
 //defines each enemies speed and starting location.
 for(var i=0; i <= allEnemies.length; i++){
-
     if(i = allEnemies[0]){
         i.enemySpeed = 150;
         i.y = 67;
@@ -190,7 +192,7 @@ for(var i=0; i <= allEnemies.length; i++){
     }
 
      if(i = allEnemies[2]){
-        i.enemySpeed = 125;
+        i.enemySpeed = Math.floor((Math.random()*330)+50);// = 125;
         i.y = 150;
     }
 
@@ -200,7 +202,7 @@ for(var i=0; i <= allEnemies.length; i++){
     }
 
      if(i = allEnemies[4]){
-        i.enemySpeed = 130;
+        i.enemySpeed = Math.floor((Math.random()*350)+20);// = 130;
         i.y = 230;
     }
 
