@@ -8,17 +8,27 @@ var spriteWidth = 171;
 var WIDTH = 505; //width of the rectangular area
 var HEIGHT = 606; //height of the rectangular area
 
+
 //delta time variables for enemies and player updates
 var lastFrameTimeStamp = new Date().getTime();
 var dt = (new Date().getTime() - lastFrameTimeStamp) / 1000;
 
 // Enemies the player must avoid
 var Enemy = function (name) {
-    var enemy = Object.create(Enemy.prototype);
-
     // The image/sprite for enemies
     this.sprite = 'images/enemy-bug.png';
 }
+
+//default player
+var selectedPlayer = 'images/char-horn-girl.png';
+
+// player class
+var Player = function(x, y) {
+    //var player = Object.create(Player.prototype);
+    //user can select a different player sprite.
+    this.sprite = selectedPlayer;
+}
+
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -38,12 +48,6 @@ Enemy.prototype.update = function(dt) {
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 101, 171);
-}
-
-// player class
-var Player = function(x, y) {
-    var player = Object.create(Player.prototype);
-    this.sprite = 'images/char-horn-girl.png';
 }
 
 Enemy.prototype.checkCollisions = function(enemy, player) {
@@ -70,6 +74,7 @@ var playerLocation = {
     y: 400
 }
 
+//prevent player from moving outside of canvas
 function checkPlayerBounds() {
     // Check bounds
     if(this.playerLocation.x < 0) {
@@ -100,6 +105,7 @@ Player.prototype.render = function() {
 }
 
 Player.prototype.update = function(dt) {
+     this.sprite = selectedPlayer;
      //event handler for player movement
      Player.handleInput = function(keyCode) {
         if(playerLocation.x <= WIDTH){
@@ -145,8 +151,6 @@ function gameEnd(){
   ctx.fillText("YOU'RE A WINNER!", 50, 500);
 }
 
-//ctx.clearRect(0,0, width, height);
-
 // Game over
 function gameOver() {
     document.getElementById('game-over').style.display = 'block';
@@ -167,9 +171,7 @@ function gameReset() {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var player = new Player();
-player.x = 200;
-Player.y = 400;
+var player = new Player(200, 400);
 
 var a = new Enemy("a");
 var b = new Enemy("b");
@@ -179,34 +181,87 @@ var e = new Enemy("e");
 
 var allEnemies = [a, b, c, d, e];
 
+     //console.log("allEnemies[0] instance of = " + );
 //defines each enemies speed and starting location.
 for(var i=0; i <= allEnemies.length; i++){
     if(i = allEnemies[0]){
-        i.enemySpeed = 150;
+        i.enemySpeed = Math.floor((Math.random() * 200) + 75);
         i.y = 67;
     }
 
      if(i = allEnemies[1]){
-        i.enemySpeed = 70;
+        i.enemySpeed = Math.floor((Math.random() * 200) + 75);
         i.y = 67;
     }
 
      if(i = allEnemies[2]){
-        i.enemySpeed = Math.floor((Math.random()*330)+50);// = 125;
+        i.enemySpeed = Math.floor((Math.random() * 200) + 75);
         i.y = 150;
     }
 
      if(i = allEnemies[3]){
-        i.enemySpeed = 125;
+        i.enemySpeed = Math.floor((Math.random() * 200) + 75);
         i.y = 150;
     }
 
      if(i = allEnemies[4]){
-        i.enemySpeed = Math.floor((Math.random()*350)+20);// = 130;
+        i.enemySpeed = Math.floor((Math.random() * 200) + 75);
         i.y = 230;
     }
-
 }
+
+function showWindow(){
+  dialog.showModal();
+}
+function closeWindow(){
+  launchbutton.classList.remove("pressed");
+  dialog.close();
+}
+
+  var launchbutton = document.getElementById("launch"),
+  dialog = document.getElementById('dialog');
+
+  cancel = document.getElementById("cancel");
+  launchbutton.onclick = function() {
+    launchbutton.classList.add("pressed");
+    setTimeout( function() { showWindow() }, 800);
+  }
+  cancel.onclick = function(){ closeWindow(); }
+
+  //user can select a different player sprite from the 5 below
+  //this change can be made at any point in the game
+  pink = document.getElementById('pink');
+  cat = document.getElementById("cat");
+  princess = document.getElementById("princess");
+  horn = document.getElementById("horn");
+  boy = document.getElementById("boy");
+
+  pink.onclick = function() {
+    this.sprite = 'images/char-pink-girl.png';
+    selectedPlayer = this.sprite;
+    closeWindow();
+  };
+  cat.onclick = function() {
+    this.sprite = 'images/char-cat-girl.png';
+    selectedPlayer = this.sprite;
+    closeWindow();
+  };
+  princess.onclick = function() {
+    this.sprite = 'images/char-princess-girl.png';
+    selectedPlayer = this.sprite;
+    closeWindow();
+  };
+  horn.onclick = function() {
+    this.sprite = 'images/char-horn-girl.png';
+    selectedPlayer = this.sprite;
+    closeWindow();
+  };
+  boy.onclick = function() {
+    this.sprite = 'images/char-boy.png';
+    selectedPlayer = this.sprite;
+    closeWindow();
+  };
+
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

@@ -2,6 +2,126 @@ body {
     text-align: center;
 }
 
+/* begin for modal window */
+.sprite-select-button {
+  padding: 1rem;
+  font-size: 1.1rem;
+  background: white;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#sprites {
+  padding: 1rem;
+  font-size: 1.1rem;
+  background: white;
+ /* background: #333; */
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  to { background: rgba(0,0,0,0.9); }
+}
+
+body { font-family: Avenir, Arial, sans-serif; }
+figure#launchtime {
+  min-height: 75px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  flex-direction: column;
+}
+
+figure#launchtime button {
+  width: 150px;
+  height: 40px;
+  border: none;
+  color: #fff;
+  font-weight: 900;
+  font-size: 12px;
+  background: red;
+  text-shadow: 0 3px 1px rgba(122,17,8,.8);
+  box-shadow: 0 8px 0 rgb(183,9,0),0 15px 20px rgba(0,0,0,.35);
+  text-transform: uppercase;
+  transition: .4s all ease-in;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0)
+}
+
+figure#launchtime button span { position:relative; }
+
+figure#launchtime button.pressed {
+  padding-top: 3px;
+  transform: translateY(4px);
+  box-shadow: 0 4px 0 rgb(183,0,0), 0 8px 6px rgba(0,0,0,.45);
+}
+
+figure#launchtime figcaption { margin-top: 2rem; }
+dialog {
+  width: 44%; text-align: center;
+  border: 3px solid red;
+  background: #100; color: black;
+  background-color: white;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 1em;
+  width: fit-content;
+  height: fit-content;
+  display: none;
+}
+
+dialog div {
+  display: flex;
+  justify-content: space-between; 
+}
+
+#sprites {
+    margin-bottom: 70px;
+}
+
+dialog::backdrop { 
+  animation: fadeIn .2s forwards; 
+}
+
+dialog button { 
+  padding: 1rem;
+  font-size: 1.1rem;
+  background: #333;
+  color: white;
+  border: none;
+  cursor: pointer; 
+}
+
+dialog[open] { display: block; }
+.backdrop {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    animation: fadeIn .5s forwards;
+}
+
+.flex-box {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 10px;
+}
+/* end for modal window */
+
+/* used to show end of game  */
 #game-over, #game-over-win, #game-over-overlay {
     margin: auto;
     width: 505px;
