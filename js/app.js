@@ -14,9 +14,9 @@ var lastFrameTimeStamp = new Date().getTime();
 var dt = (new Date().getTime() - lastFrameTimeStamp) / 1000;
 
 // Enemies the player must avoid
-var Enemy = function (name) {
+var Enemy = function () {
     // The image/sprite for enemies
-    this.sprite = 'images/enemy-bug.png';
+  this.sprite = 'images/enemy-bug.png';
 }
 
 //default player
@@ -24,7 +24,6 @@ var selectedPlayer = 'images/char-horn-girl.png';
 
 // player class
 var Player = function(x, y) {
-    //var player = Object.create(Player.prototype);
     //user can select a different player sprite.
     this.sprite = selectedPlayer;
 }
@@ -181,7 +180,6 @@ var e = new Enemy("e");
 
 var allEnemies = [a, b, c, d, e];
 
-     //console.log("allEnemies[0] instance of = " + );
 //defines each enemies speed and starting location.
 for(var i=0; i <= allEnemies.length; i++){
     if(i = allEnemies[0]){
@@ -210,6 +208,7 @@ for(var i=0; i <= allEnemies.length; i++){
     }
 }
 
+//functions for player select modal window
 function showWindow(){
   dialog.showModal();
 }
@@ -228,6 +227,11 @@ function closeWindow(){
   }
   cancel.onclick = function(){ closeWindow(); }
 
+  function selectClose(selectedPlayer){
+    selectedPlayer = this.sprite;
+    closeWindow();
+  }
+
   //user can select a different player sprite from the 5 below
   //this change can be made at any point in the game
   pink = document.getElementById('pink');
@@ -237,29 +241,28 @@ function closeWindow(){
   boy = document.getElementById("boy");
 
   pink.onclick = function() {
-    this.sprite = 'images/char-pink-girl.png';
-    selectedPlayer = this.sprite;
-    closeWindow();
+    selectedPlayer = 'images/char-pink-girl.png';
+    selectClose(selectedPlayer);
   };
+
   cat.onclick = function() {
-    this.sprite = 'images/char-cat-girl.png';
-    selectedPlayer = this.sprite;
-    closeWindow();
+    selectedPlayer = 'images/char-cat-girl.png';
+    selectClose(selectedPlayer);
   };
+
   princess.onclick = function() {
-    this.sprite = 'images/char-princess-girl.png';
-    selectedPlayer = this.sprite;
-    closeWindow();
+    selectedPlayer = 'images/char-princess-girl.png';
+    selectClose(selectedPlayer);
   };
+
   horn.onclick = function() {
-    this.sprite = 'images/char-horn-girl.png';
-    selectedPlayer = this.sprite;
-    closeWindow();
+    selectedPlayer = 'images/char-horn-girl.png';
+    selectClose(selectedPlayer);
   };
+
   boy.onclick = function() {
-    this.sprite = 'images/char-boy.png';
-    selectedPlayer = this.sprite;
-    closeWindow();
+    selectedPlayer = 'images/char-boy.png';
+    selectClose(selectedPlayer);
   };
 
 
