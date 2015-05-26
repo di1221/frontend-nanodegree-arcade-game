@@ -46,7 +46,15 @@
   <button id="cancel">Cancel</button>
 </div>
 </dialog>
-
+<SCRIPT>
+     //test for browser and only displays 'select sprite' button if chrome
+     //the modal window does not work in other browsers
+     var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+	 if(!is_chrome)
+	 {
+	   document.getElementById('launchtime').style.display = 'none';
+	 }
+</SCRIPT>
     <script src="js/resources.js"></script>
     <script src="js/engine.js"></script>
     <script src="js/app.js"></script>
