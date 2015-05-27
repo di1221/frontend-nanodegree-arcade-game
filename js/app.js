@@ -15,62 +15,51 @@ var dt = (new Date().getTime() - lastFrameTimeStamp) / 1000;
 
 // Enemies the player must avoid
 var Enemy = function () {
-    // The image/sprite for enemies
+  // The image/sprite for enemies
   this.sprite = 'images/enemy-bug.png';
 }
-
-//default player
-var selectedPlayer = 'images/char-horn-girl.png';
-
-// player class
-var Player = function(x, y) {
-    //user can select a different player sprite.
-    this.sprite = selectedPlayer;
-}
-
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // multiply any movement by the dt parameter to ensure 
-    // the game runs at the same speed on all computers.
-    if(this.x < WIDTH){
-      this.x += this.enemySpeed * dt;
-    } else {
-        this.x = -30;
-    }
-
+  // multiply any movement by the dt parameter to ensure 
+  // the game runs at the same speed on all computers.
+  if(this.x < WIDTH){
+    this.x += this.enemySpeed * dt;
+  } else {
+      this.x = -30;
+  }
     //checks for collisions between any enemy and the player
     this.checkCollisions(this, player);
 }
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 101, 171);
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 101, 171);
 }
 
 Enemy.prototype.checkCollisions = function(enemy, player) {
 
-     player.x = playerLocation.x;
-     player.y = playerLocation.y;
+  player.x = playerLocation.x;
+  player.y = playerLocation.y;
 
-    if (this.isColliding(this, player)) {
-      gameOver();
-    }
+  if (this.isColliding(this, player)) {
+    gameOver();
+  }
 }
 
 //bounding box algorithm
 Enemy.prototype.isColliding = function(enemy, player) {
-        return ((this.x + spriteWidth/2) > (player.x) &&
-            (this.x) < (player.x + spriteWidth/2)  &&
-             (this.y + spriteHeight/2) > (player.y)  &&
-             (this.y) < (player.y + spriteHeight/2));
+      return ((this.x + spriteWidth/2) > (player.x) &&
+          (this.x) < (player.x + spriteWidth/2)  &&
+          (this.y + spriteHeight/2) > (player.y)  &&
+          (this.y) < (player.y + spriteHeight/2));
 };
 
 //starting position for player
 var playerLocation = {
-    x: 200,
-    y: 400
+  x: 200,
+  y: 400
 }
 
 //prevent player from moving outside of canvas
@@ -97,10 +86,16 @@ function checkPlayerBounds() {
     }
 }
 
+// player class
+var Player = function(x, y) {
+  //user can select a different player sprite.
+  this.sprite = selectedPlayer;
+}
+
 // Draw the player on the screen
 Player.prototype.render = function() {
-    checkPlayerBounds();
-    ctx.drawImage(Resources.get(this.sprite), playerLocation.x, playerLocation.y, 101, 171);
+  checkPlayerBounds();
+  ctx.drawImage(Resources.get(this.sprite), playerLocation.x, playerLocation.y, 101, 171);
 }
 
 Player.prototype.update = function(dt) {
@@ -182,40 +177,40 @@ var allEnemies = [a, b, c, d, e];
 
 //defines each enemies speed and starting location.
 for(var i=0; i <= allEnemies.length; i++){
-    if(i = allEnemies[0]){
-        i.enemySpeed = Math.floor((Math.random() * 200) + 75);
-        i.y = 67;
-    }
+  if(i = allEnemies[0]){
+    i.enemySpeed = Math.floor((Math.random() * 200) + 75);
+    i.y = 67;
+  }
 
-     if(i = allEnemies[1]){
-        i.enemySpeed = Math.floor((Math.random() * 200) + 75);
-        i.y = 67;
-    }
+  if(i = allEnemies[1]){
+    i.enemySpeed = Math.floor((Math.random() * 200) + 75);
+    i.y = 67;
+  }
 
-     if(i = allEnemies[2]){
-        i.enemySpeed = Math.floor((Math.random() * 200) + 75);
-        i.y = 150;
-    }
+  if(i = allEnemies[2]){
+    i.enemySpeed = Math.floor((Math.random() * 200) + 75);
+    i.y = 150;
+  }
 
-     if(i = allEnemies[3]){
-        i.enemySpeed = Math.floor((Math.random() * 200) + 75);
-        i.y = 150;
-    }
+  if(i = allEnemies[3]){
+    i.enemySpeed = Math.floor((Math.random() * 200) + 75);
+    i.y = 150;
+  }
 
-     if(i = allEnemies[4]){
-        i.enemySpeed = Math.floor((Math.random() * 200) + 75);
-        i.y = 230;
-    }
+  if(i = allEnemies[4]){
+    i.enemySpeed = Math.floor((Math.random() * 200) + 75);
+    i.y = 230;
+  }
 }
 
-//functions for player select modal window
-function showWindow(){
-  dialog.showModal();
-}
-function closeWindow(){
-  launchbutton.classList.remove("pressed");
-  dialog.close();
-}
+  //functions for player select modal window
+  function showWindow(){
+    dialog.showModal();
+  }
+  function closeWindow(){
+    launchbutton.classList.remove("pressed");
+    dialog.close();
+  }
 
   var launchbutton = document.getElementById("launch"),
   dialog = document.getElementById('dialog');
@@ -227,44 +222,56 @@ function closeWindow(){
   }
   cancel.onclick = function(){ closeWindow(); }
 
-  function selectClose(selectedPlayer){
-    selectedPlayer = this.sprite;
-    closeWindow();
-  }
+function selectClose(selectedPlayer){
+  selectedPlayer = this.sprite;
+  closeWindow();
+}
 
-  //user can select a different player sprite from the 5 below
-  //this change can be made at any point in the game
-  pink = document.getElementById('pink');
-  cat = document.getElementById("cat");
-  princess = document.getElementById("princess");
-  horn = document.getElementById("horn");
-  boy = document.getElementById("boy");
+//playing with refactoring of selected player
+//var elements = document.getElementsByTagName("img");
 
-  pink.onclick = function() {
-    selectedPlayer = 'images/char-pink-girl.png';
-    selectClose(selectedPlayer);
-  };
 
-  cat.onclick = function() {
-    selectedPlayer = 'images/char-cat-girl.png';
-    selectClose(selectedPlayer);
-  };
+//for(i=0; i<elements.length; i++){
+//  selectedPlayer = elements[i].getAttribute("src");
+//console.log("selectedPlayer = " + selectedPlayer);
+//}
 
-  princess.onclick = function() {
-    selectedPlayer = 'images/char-princess-girl.png';
-    selectClose(selectedPlayer);
-  };
 
-  horn.onclick = function() {
-    selectedPlayer = 'images/char-horn-girl.png';
-    selectClose(selectedPlayer);
-  };
+//default player
+var selectedPlayer = 'images/char-horn-girl.png';
 
-  boy.onclick = function() {
-    selectedPlayer = 'images/char-boy.png';
-    selectClose(selectedPlayer);
-  };
+//user can select a different player sprite from the 5 below
+//this change can be made at any point in the game
+pink = document.getElementById('pink');
+cat = document.getElementById("cat");
+princess = document.getElementById("princess");
+horn = document.getElementById("horn");
+boy = document.getElementById("boy");
 
+pink.onclick = function() {
+  selectedPlayer = 'images/char-pink-girl.png';
+  selectClose(selectedPlayer);
+};
+
+cat.onclick = function() {
+  selectedPlayer = 'images/char-cat-girl.png';
+  selectClose(selectedPlayer);
+};
+
+princess.onclick = function() {
+  selectedPlayer = 'images/char-princess-girl.png';
+  selectClose(selectedPlayer);
+};
+
+horn.onclick = function() {
+  selectedPlayer = 'images/char-horn-girl.png';
+  selectClose(selectedPlayer);
+};
+
+boy.onclick = function() {
+  selectedPlayer = 'images/char-boy.png';
+  selectClose(selectedPlayer);
+};
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
