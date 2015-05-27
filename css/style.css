@@ -89,7 +89,7 @@ dialog div {
 }
 
 dialog::backdrop { 
-  animation: fadeIn .2s forwards; 
+  animation: fadeIn .1s forwards; 
 }
 
 dialog button { 
