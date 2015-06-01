@@ -1,17 +1,16 @@
-// Speed in pixels per second
-var enemySpeed;
-
 var isGameOver;
-var SPRITEHEIGHT = 101;
-var SPRITEWIDTH = 171;
+var SPRITE_HEIGHT = 101;
+var SPRITE_WIDTH = 171;
 
 var WIDTH = 505; //width of the rectangular area
 var HEIGHT = 606; //height of the rectangular area
 
 // Enemies our player must avoid
 var Enemy = function() {
-    // The image/sprite for our enemies, this uses
-    this.sprite = 'images/enemy-bug.png';
+  // Speed in pixels per second
+  var enemySpeed;
+  // The image/sprite for our enemies, this uses
+  this.sprite = 'images/enemy-bug.png';
 };
 
 // Update the enemy's position, required method for game
@@ -45,10 +44,10 @@ Enemy.prototype.checkCollisions = function(enemy, player) {
 
 //bounding box algorithm
 Enemy.prototype.isColliding = function(enemy, player) {
-      return ((this.x + SPRITEWIDTH/2.2) > (player.x) &&
-          (this.x) < (player.x + SPRITEWIDTH/2.2)  &&
-          (this.y + SPRITEHEIGHT/2) > (player.y)  &&
-          (this.y) < (player.y + SPRITEHEIGHT/2));
+      return ((this.x + SPRITE_WIDTH/2.2) > (player.x) &&
+          (this.x) < (player.x + SPRITE_WIDTH/2.2)  &&
+          (this.y + SPRITE_HEIGHT/2) > (player.y)  &&
+          (this.y) < (player.y + SPRITE_HEIGHT/2));
 };
 
 //starting position for player
@@ -169,7 +168,7 @@ for (i=0; i<=4; i++) {
   allEnemies.push(enemy);
 }
 
-//var yLocation;
+//enemies position on y axis
 var yArray = [67, 67, 150, 150, 230];
 
 //defines each enemies speed and starting location.
@@ -185,6 +184,15 @@ for (var i=0; i < allEnemies.length; i++) {
        i.enemySpeed = enemySpeed;
     }
   }
+}
+
+//default player
+var selectedPlayer = 'images/char-horn-girl.png';
+
+
+function selectClose(selectedPlayer) {
+  selectedPlayer = this.sprite;
+  closeWindow();
 }
 
 //functions for player select modal window
@@ -207,14 +215,6 @@ launchbutton.onclick = function() {
 
 cancel.onclick = function(){ closeWindow(); };
 
-//default player
-var selectedPlayer = 'images/char-horn-girl.png';
-
-
-function selectClose(selectedPlayer) {
-  selectedPlayer = this.sprite;
-  closeWindow();
-}
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
