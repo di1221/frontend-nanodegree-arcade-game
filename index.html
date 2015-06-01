@@ -12,7 +12,7 @@
     </div>
     <div id="game-over">
       <h1>GAME OVER</h1>
-      <button id="play-again" onclick="gameReset()">Play Again</button>
+      <button id="play-again" onclick="player.gameReset()">Play Again</button>
     </div>
     <div id="game-over-win">
       <h2>You're a Winner!</h2>
@@ -26,20 +26,20 @@
 <dialog id="dialog">
   <h2>Choose your player</h2>
 <div id="sprites" class="flex-box">
-  <span id="pink">
-  	<img src='images/char-pink-girl.png' alt="player" width="101px" height="171px">
+  <span>
+  	<img src='images/char-pink-girl.png' alt="player" onclick="player.spriteSelection('images/char-pink-girl.png')" width="101px" height="171px">
   </span>
-  <span id="cat">
-  	<img src='images/char-cat-girl.png' alt="player" width="101px" height="171px">
+  <span>
+  	<img src='images/char-cat-girl.png' alt="playerimg" onclick="player.spriteSelection('images/char-cat-girl.png')" width="101px" height="171px">
   </span>
-  <span id="princess">
-  	<img src='images/char-princess-girl.png' alt="player" width="101px" height="171px">
+  <span>
+  	<img src='images/char-princess-girl.png' alt="player" onclick="player.spriteSelection('images/char-princess-girl.png')" width="101px" height="171px">
   </span>
-  <span id="boy">
-    <img src='images/char-boy.png' alt="player" width="101px" height="171px">
+  <span>
+    <img src='images/char-boy.png' alt="player" onclick="player.spriteSelection('images/char-boy.png')" width="101px" height="171px">
   </span>
-  <span id="horn">
-  	<img src='images/char-horn-girl.png' alt="player" width="101px" height="171px">
+  <span>
+  	<img src='images/char-horn-girl.png' alt="player" onclick="player.spriteSelection('images/char-horn-girl.png')" width="101px" height="171px">
   </span>
 </div>
 <div>
