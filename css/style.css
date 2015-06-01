@@ -81,34 +81,34 @@ dialog {
 
 dialog div {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
 }
 
 #sprites {
-    margin-bottom: 70px;
+  margin-bottom: 70px;
 }
 
-dialog::backdrop { 
-  animation: fadeIn .1s forwards; 
+dialog::backdrop {
+  animation: fadeIn .1s forwards;
 }
 
-dialog button { 
+dialog button {
   padding: 1rem;
   font-size: 1.1rem;
   background: #333;
   color: white;
   border: none;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 dialog[open] { display: block; }
 .backdrop {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    animation: fadeIn .5s forwards;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  animation: fadeIn .5s forwards;
 }
 
 .flex-box {
@@ -123,34 +123,34 @@ dialog[open] { display: block; }
 
 /* used to show end of game  */
 #game-over, #game-over-win, #game-over-overlay {
-    margin: auto;
-    width: 505px;
-    height: 550px;
-    position: absolute;
-    top: 10;
-    left: 0;
-    right: 0;
-    bottom: 15;
-    z-index: 1;
-    display: none;
+  margin: auto;
+  width: 505px;
+  height: 550px;
+  position: absolute;
+  top: 10;
+  left: 0;
+  right: 0;
+  bottom: 15;
+  z-index: 1;
+  display: none;
 }
 
 #game-over-overlay {
-    background-color: black;
-    opacity: .3;
+  background-color: black;
+  opacity: .3;
 }
 
 #game-over {
-    height: 200px;
-    text-align: center;
-    color: white;
+  height: 200px;
+  text-align: center;
+  color: white;
 }
 
 #game-over h1 {
-    font-size: 3em;
-    font-family: sans-serif;
+  font-size: 3em;
+  font-family: sans-serif;
 }
 
 #game-over button {
-    font-size: 1.5em;
+  font-size: 1.5em;
 }
