@@ -8,10 +8,35 @@ var HEIGHT = 606; //height of the rectangular area
 // Enemies our player must avoid
 var Enemy = function() {
   // Speed in pixels per second
-  var enemySpeed;
+  var enemySpeed; //= getRandomInt(400, 50);
   // The image/sprite for our enemies, this uses
   this.sprite = 'images/enemy-bug.png';
 };
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+var allEnemies = [];
+var enemy = new Enemy();
+for (i=0; i<=4; i++) {
+  enemy = new Enemy();
+  allEnemies.push(enemy);
+}
+//enemies position on y axis
+var yArray = [67, 150, 150, 230, 67];
+//console.log("this.enemySpeed = " + this.enemySpeed);
+//defines each enemies speed and starting location.
+for (var i=0; i < allEnemies.length; i++) {
+  for (var yIndex in yArray) {
+      this.y = yArray[yIndex];
+    if (i = allEnemies[yIndex]) {
+       i.y = this.y;
+       i.enemySpeed = getRandomInt(400, 50);
+  console.log("i enemySpeed = " + i.enemySpeed + "  and  i = " + yIndex);
+    }
+  }
+}
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -160,31 +185,6 @@ Player.prototype.gameReset = function() {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var player = new Player(200, 400);
-
-var allEnemies = [];
-var enemy = new Enemy();
-for (i=0; i<=4; i++) {
-  enemy = new Enemy();
-  allEnemies.push(enemy);
-}
-
-//enemies position on y axis
-var yArray = [67, 67, 150, 150, 230];
-
-//defines each enemies speed and starting location.
-for (var i=0; i < allEnemies.length; i++) {
-
-  for (var yIndex in yArray) {
-      y = yArray[yIndex];
-      i.yIndex = y;
-      enemySpeed = Math.floor((Math.random() * 200) + 75);
-
-    if (i = allEnemies[yIndex]) {
-       i.y = y;
-       i.enemySpeed = enemySpeed;
-    }
-  }
-}
 
 //default player
 var selectedPlayer = 'images/char-horn-girl.png';
